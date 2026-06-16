@@ -3,7 +3,7 @@
    name="Quadrotor_Febris21"
    ac_id="111"
    airframe="airframes/febris21/quadrotor_febris21.xml"
-   radio="airframes/febris21/radios/dummy.xml"
+   radio="airframes/febris21/radios/flysky_fsi6x.xml"
    telemetry="airframes/febris21/telemetry/default_rotorcraft.xml"
    flight_plan="airframes/febris21/flight_plans/rotorcraft_basic.xml"
    settings="airframes/febris21/settings/rotorcraft_basic.xml airframes/febris21/settings/nps.xml"
