@@ -63,6 +63,9 @@ DFU_ADDR ?= 0x08002000
 # verify if dfu-util version >= 0.7
 DFU_UTIL_VERSION = $(shell (dfu-util --version 2>/dev/null || echo NotFound 0) | head -n 1 | awk '{print $$2}')
 VERIFY = $(shell echo '$(DFU_UTIL_VERSION)>=0.7' | bc)
+# 强制关闭烧录后的验证过程（开始）
+VERIFY = 0
+# 强制关闭烧录后的验证过程（结束）
 DFU_SIZE ?= $(shell ls -nl $^ | awk '{print $$5}')
 
 DFU_LEAVE ?= 1
@@ -75,7 +78,10 @@ endif
 upload: $(OBJDIR)/$(TARGET).bin
 	$(DFU_UTIL_PRE_UPLOAD_CMD)
 	@echo "Using dfu-util at $(DFU_ADDR)"
-	$(Q)dfu-util -d 0483:df11 -c 1 -i 0 -a 0 -s $(DFU_ADDR) -D $^
+# 重写烧录命令（开始）
+#	$(Q)dfu-util -d 0483:df11 -c 1 -i 0 -a 0 -s $(DFU_ADDR) -D $^
+	$(Q)dfu-util -a 0 -s $(DFUSE_VERIFY_ADDRESS) -D $^
+# 重写烧录命令（结束）
 ifeq ($(VERIFY),1)
 	@echo "Reading flashed bin file of size $(DFU_SIZE) for verification"
 	$(Q)rm -f $(OBJDIR)/verify.bla
