@@ -35,7 +35,7 @@
       <configure name="MODEM_PORT" value="UART2"/>
       <configure name="MODEM_BAUD" value="B19200"/>
     </module>
-    <module name="imu"           type="aspirin_v2.1"/>
+    <module name="imu"           type="aspirin_v2.2"/>    
     <module name="gps"           type="ublox"/>
     <module name="stabilization" type="int_quat"/>
     <module name="ahrs"          type="int_cmpl_quat">
