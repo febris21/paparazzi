@@ -31,7 +31,10 @@
       <!--define name="USE_SERVOS_7AND8"/-->
     </module>
 
-    <module name="telemetry"     type="transparent"/>
+    <module name="telemetry_transparent">
+      <configure name="MODEM_PORT" value="UART2"/>
+      <configure name="MODEM_BAUD" value="B19200"/>
+    </module>
     <module name="imu"           type="aspirin_v2.1"/>
     <module name="gps"           type="ublox"/>
     <module name="stabilization" type="int_quat"/>
