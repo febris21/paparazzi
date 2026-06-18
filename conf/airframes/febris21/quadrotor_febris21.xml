@@ -15,6 +15,11 @@
       <!-- baro board options for Lisa/M 2.0: BARO_BOARD_BMP085, BARO_MS5611_I2C, BARO_MS5611_SPI (default) -->
       <configure name="LISA_M_BARO" value="BARO_MS5611_SPI"/>
       <configure name="FLASH_MODE" value="DFU-UTIL"/>
+
+      <!-- 光流传感器配置，模块接I2C2。（由于nps模拟环境不支持光流，所以光流配置必须写道ap中。） -->
+      <module name="px4flow_i2c">
+        <configure name="PX4FLOW_I2C_DEV" value="i2c2"/>
+      </module>
     </target>
 
     <target name="nps" board="pc">
@@ -46,11 +51,6 @@
     
     <module name="geo_mag"/>
     <module name="air_data"/>
-
-    // 光流传感器配置，模块接I2C2
-    <module name="px4flow_i2c">
-      <configure name="PX4FLOW_I2C_DEV" value="i2c2"/>
-    </module>
 
     <!--define name="KILL_ON_GROUND_DETECT" value="TRUE"/-->
   </firmware>
