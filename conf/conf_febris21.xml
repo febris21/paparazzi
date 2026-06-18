@@ -7,7 +7,7 @@
    telemetry="airframes/febris21/telemetry/default_rotorcraft.xml"
    flight_plan="airframes/febris21/flight_plans/rotorcraft_basic.xml"
    settings="airframes/febris21/settings/rotorcraft_basic.xml airframes/febris21/settings/nps.xml"
-   settings_modules="modules/ahrs_int_cmpl_quat.xml modules/air_data.xml modules/electrical.xml modules/geo_mag.xml modules/gps.xml modules/gps_ublox.xml modules/guidance_pid_rotorcraft.xml modules/guidance_rotorcraft.xml modules/imu_common.xml modules/nav_rotorcraft.xml modules/px4flow_i2c.xml modules/stabilization_int_quat.xml"
+   settings_modules="modules/ahrs_int_cmpl_quat.xml modules/air_data.xml modules/electrical.xml modules/geo_mag.xml modules/gps.xml modules/gps_ublox.xml modules/gps_ubx_ucenter.xml modules/guidance_pid_rotorcraft.xml modules/guidance_rotorcraft.xml modules/imu_common.xml modules/nav_rotorcraft.xml modules/stabilization_int_quat.xml"
    gui_color="white"
   />
 </conf>
