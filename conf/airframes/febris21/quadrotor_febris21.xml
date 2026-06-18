@@ -47,6 +47,11 @@
     <module name="geo_mag"/>
     <module name="air_data"/>
 
+    // 光流传感器配置，模块接I2C2
+    <module name="px4flow_i2c">
+      <configure name="PX4FLOW_I2C_DEV" value="i2c2"/>
+    </module>
+
     <!--define name="KILL_ON_GROUND_DETECT" value="TRUE"/-->
   </firmware>
 
