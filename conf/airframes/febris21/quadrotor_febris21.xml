@@ -21,6 +21,11 @@
       <module name="fdm" type="jsbsim"/>
     </target>
 
+    <module name="telemetry" 	type="transparent">    
+      <configure name="MODEM_PORT" value="UART2"/>
+      <configure name="MODEM_BAUD" value="B19200"/>
+    </module>
+
     <module name="radio_control" type="spektrum">
       <define name="RADIO_MODE" value="RADIO_AUX1"/>
       <configure name="USE_SECONDARY_SPEKTRUM_RECEIVER" value="1"/>
@@ -32,10 +37,6 @@
       <!--define name="USE_SERVOS_7AND8"/-->
     </module>
 
-    <module name="telemetry_transparent">
-      <configure name="MODEM_PORT" value="UART2"/>
-      <configure name="MODEM_BAUD" value="B19200"/>
-    </module>
     <module name="imu"           type="aspirin_v2.2"/>    
     <module name="gps"           type="ublox"/>
     <module name="stabilization" type="int_quat"/>
