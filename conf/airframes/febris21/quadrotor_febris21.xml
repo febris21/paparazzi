@@ -42,7 +42,7 @@
     </module>
 
     <module name="imu"           type="aspirin_v2.2"/>    
-    <module name="gps"           type="ublox"/>
+    <module name="gps"           type="ubx_ucenter"/>
     <module name="stabilization" type="int_quat"/>
     <module name="ahrs"          type="int_cmpl_quat">
       <define name="AHRS_GRAVITY_HEURISTIC_FACTOR" value="30"/>
