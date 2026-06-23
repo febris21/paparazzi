@@ -184,6 +184,17 @@
      <program name="Payload Config" />
    </session>
 
+   <session name="Flight USB-serial@19200">
+     <program name="Data Link">
+       <arg flag="-d" constant="/dev/ttyUSB0"/>
+       <arg flag="-s" constant="19200"/>
+     </program>
+     <program name="Server"/>
+     <program name="GCS"/>
+     <program name="Messages"/>
+     <program name="Real-time Plotter"/>
+   </session>
+
    <session name="Flight USB-serial@115200">
      <program name="Data Link">
        <arg flag="-d" constant="/dev/ttyUSB0"/>
