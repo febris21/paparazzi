@@ -83,9 +83,18 @@
   </command_laws>
 
   <section name="IMU" prefix="IMU_">
+<!--
     <define name="ACCEL_X_NEUTRAL" value="11"/>
     <define name="ACCEL_Y_NEUTRAL" value="11"/>
     <define name="ACCEL_Z_NEUTRAL" value="-25"/>
+-->
+
+    <define name="ACCEL_X_NEUTRAL" value="0"/>
+    <define name="ACCEL_Y_NEUTRAL" value="-4"/>
+    <define name="ACCEL_Z_NEUTRAL" value="127"/>
+    <define name="ACCEL_X_SENS" value="4.912952628846816" integer="16"/>
+    <define name="ACCEL_Y_SENS" value="4.887809196682819" integer="16"/>
+    <define name="ACCEL_Z_SENS" value="4.889228798093371" integer="16"/>
 
     <!-- replace this with your own calibration -->
     <define name="MAG_X_NEUTRAL" value="-179"/>
