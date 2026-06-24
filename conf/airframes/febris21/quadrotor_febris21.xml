@@ -83,23 +83,26 @@
   </command_laws>
 
   <section name="IMU" prefix="IMU_">
-<!--
+<!-- 加速度计出厂值   
     <define name="ACCEL_X_NEUTRAL" value="11"/>
     <define name="ACCEL_Y_NEUTRAL" value="11"/>
     <define name="ACCEL_Z_NEUTRAL" value="-25"/>
 -->
 
+    <!-- 加速度计校正后-中立点 -->    
     <define name="ACCEL_X_NEUTRAL" value="0"/>
     <define name="ACCEL_Y_NEUTRAL" value="-4"/>
     <define name="ACCEL_Z_NEUTRAL" value="127"/>
+    <!-- 加速度计校正后-数值 -->
     <define name="ACCEL_X_SENS" value="4.912952628846816" integer="16"/>
     <define name="ACCEL_Y_SENS" value="4.887809196682819" integer="16"/>
     <define name="ACCEL_Z_SENS" value="4.889228798093371" integer="16"/>
 
-    <!-- replace this with your own calibration -->
+    <!-- 罗盘出厂值-中立点 -->
     <define name="MAG_X_NEUTRAL" value="-179"/>
     <define name="MAG_Y_NEUTRAL" value="-21"/>
     <define name="MAG_Z_NEUTRAL" value="79"/>
+    <!-- 罗盘出厂值-数值 -->
     <define name="MAG_X_SENS" value="4.17334785618" integer="16"/>
     <define name="MAG_Y_SENS" value="3.98885954135" integer="16"/>
     <define name="MAG_Z_SENS" value="4.40442339014" integer="16"/>
@@ -109,6 +112,7 @@
     <define name="BODY_TO_IMU_PSI"   value="0." unit="deg"/>
   </section>
 
+  <!-- 磁偏角出厂值 -->
   <section name="AHRS" prefix="AHRS_">
     <!-- values used if no GPS fix, on 3D fix is update by geo_mag module -->
     <!-- Toulouse -->
