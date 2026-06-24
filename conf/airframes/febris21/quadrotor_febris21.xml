@@ -508,11 +508,19 @@
     <define name="MODE_AUTO2"  value="AP_MODE_NAV"/>
   </section>
 
+  <!-- 电池监测（Battery Monitoring）配置 
+  
+  -->
   <section name="BAT">
+    <!-- 灾难性低电量 -->
     <define name="CATASTROPHIC_BAT_LEVEL" value="9.3" unit="V"/>
+    <!-- 严重低电量 -->
     <define name="CRITIC_BAT_LEVEL" value="9.6" unit="V"/>
+    <!-- 低电量警告 -->
     <define name="LOW_BAT_LEVEL" value="10.1" unit="V"/>
+    <!-- 满电电压 -->
     <define name="MAX_BAT_LEVEL" value="12.4" unit="V"/>
+    <!-- 满油门电流 -->
     <define name="MILLIAMP_AT_FULL_THROTTLE" value="30000"/>
   </section>
 
