@@ -20,6 +20,7 @@
       <module name="px4flow_i2c">
         <configure name="PX4FLOW_I2C_DEV" value="i2c1"/>
       </module>
+      <module name="opticflow_hover"/>
     </target>
 
     <target name="nps" board="pc">

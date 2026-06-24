@@ -37,7 +37,7 @@
   </settings>
 
   <dep>
-    <depends>cv_opticflow|px4flow</depends>
+    <depends>px4flow_i2c</depends>
   </dep>
 
   <header>
