@@ -83,11 +83,11 @@
   </command_laws>
 
   <section name="IMU" prefix="IMU_">
-<!-- 加速度计出厂值   
+    <!-- 加速度计出厂值   
     <define name="ACCEL_X_NEUTRAL" value="11"/>
     <define name="ACCEL_Y_NEUTRAL" value="11"/>
     <define name="ACCEL_Z_NEUTRAL" value="-25"/>
--->
+    -->
 
     <!-- 加速度计校正后-中立点 -->    
     <define name="ACCEL_X_NEUTRAL" value="0"/>
@@ -121,14 +121,60 @@
     <define name="H_Z" value="0.858336"/>
   </section>
 
+  <!-- 惯性导航默认设置 -->
   <section name="INS" prefix="INS_">
   </section>
 
+  <!-- 姿态控制器（Attitude Controller）配置 -->
   <section name="STABILIZATION_ATTITUDE" prefix="STABILIZATION_ATTITUDE_">
-    <!-- setpoints -->
+    <!-- Setpoints（遥控输入限制） 
+        表示最大倾角：
+        横滚最大 ±45°
+        俯仰最大 ±45°
+
+        遥控杆打满时：
+        Roll = 45°
+        Pitch = 45°
+
+        增大
+
+        例如：
+        SP_MAX_PHI   = 60
+        SP_MAX_THETA = 60
+
+        飞机更灵活。
+
+        减小
+
+        例如：
+        SP_MAX_PHI   = 25
+        SP_MAX_THETA = 25
+
+        飞机更稳。
+
+        适合：
+        新手
+        室内飞行
+        测试
+    -->
     <define name="SP_MAX_PHI"     value="45." unit="deg"/>
     <define name="SP_MAX_THETA"   value="45." unit="deg"/>
+    <!-- 遥控器偏航（Yaw）摇杆打满时，允许的最大偏航角速度 -->
     <define name="SP_MAX_R"       value="90." unit="deg/s"/>
+    <!-- Deadband（遥控死区）
+        对应：
+        参数	  通道
+        A	      Roll
+        E	      Pitch
+        R	      Yaw
+
+        表示：
+        摇杆中心 ±250，范围内忽略输入。
+
+        防止：
+        遥控器抖动
+        摇杆回中不准
+    -->
     <define name="DEADBAND_A"     value="0"/>
     <define name="DEADBAND_E"     value="0"/>
     <define name="DEADBAND_R"     value="250"/>
