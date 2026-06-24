@@ -179,7 +179,46 @@
     <define name="DEADBAND_E"     value="0"/>
     <define name="DEADBAND_R"     value="250"/>
 
-    <!-- reference -->
+    <!-- Reference（期望姿态响应）
+        例如：
+        REF_OMEGA_P = 400
+
+        对应：
+        Roll自然频率
+
+        可以理解为：
+        想让飞机响应多快
+
+        数值越大：
+        反应越快
+        更灵敏
+
+        数值越小：
+        更柔和
+        更稳定
+
+        Roll
+        REF_OMEGA_P = 400
+        Pitch
+        REF_OMEGA_Q = 400
+        Yaw
+        REF_OMEGA_R = 250
+
+        REF_ZETA（阻尼）
+        REF_ZETA_P = 0.85
+        REF_ZETA_Q = 0.85
+        REF_ZETA_R = 0.85
+
+        控制：
+        是否振荡
+
+        经验值：
+        Zeta	效果
+        0.5	  快但容易过冲
+        0.7	  较快
+        0.85	官方推荐
+        1.0	  最稳
+    -->
     <define name="REF_OMEGA_P"  value="400" unit="deg/s"/>
     <define name="REF_ZETA_P"   value="0.85"/>
     <define name="REF_MAX_P"    value="400." unit="deg/s"/>
@@ -195,7 +234,28 @@
     <define name="REF_MAX_R"    value="180." unit="deg/s"/>
     <define name="REF_MAX_RDOT" value="RadOfDeg(1800.)"/>
 
-    <!-- feedback -->
+    <!-- 核心控制增益 PHI / THETA / PSI PID  
+        P
+        误差越大
+        修正越强
+
+        过大：振荡
+        过小：发软
+
+        D
+        抑制振荡
+
+        过大：
+        电机抖动
+        噪声放大
+
+        I
+        消除长期偏差
+
+        例如：
+        重心偏移
+        风干扰
+    -->
     <define name="PHI_PGAIN"  value="1000"/>
     <define name="PHI_DGAIN"  value="400"/>
     <define name="PHI_IGAIN"  value="200"/>
@@ -208,26 +268,226 @@
     <define name="PSI_DGAIN"  value="300"/>
     <define name="PSI_IGAIN"  value="10"/>
 
-    <!-- feedforward -->
+    <!-- DDGAIN（前馈） 
+        这是：
+        Feed Forward
+        不是 PID。
+
+        作用：
+        提前给控制量
+
+        让飞机：
+        更跟手
+        更丝滑
+    -->
     <define name="PHI_DDGAIN"   value="300"/>
     <define name="THETA_DDGAIN" value="300"/>
     <define name="PSI_DDGAIN"   value="300"/>
   </section>
 
+  <!-- Paparazzi 对四旋翼的控制链路大致是：
+
+      导航控制（Guidance）
+              ↓
+      姿态控制（Attitude）
+              ↓
+      角速度控制（Rate）
+              ↓
+      电机混控
+              ↓
+      电机
+
+      因此：
+      GUIDANCE_V
+      负责 垂直方向（高度）控制
+
+      而：
+      GUIDANCE_H
+      负责 水平方向（位置）控制
+  -->
   <section name="GUIDANCE_V" prefix="GUIDANCE_V_">
+    <!-- 高度控制P增益。
+        作用：
+        当前高度和目标高度差多少
+        ↓
+        决定增加多少油门
+
+        例如：
+        目标高度 10m
+        实际高度 8m
+
+        误差 = 2m
+
+        KP越大：
+        加油门越猛
+    -->
     <define name="HOVER_KP"    value="150"/>
+    <!-- 高度变化速度反馈。
+        例如：
+        正在快速上升
+        KD会提前减小油门。
+
+        作用：
+        抑制过冲
+    -->
     <define name="HOVER_KD"    value="80"/>
+    <!-- 积分项。
+        解决：
+        长期漂高
+        长期掉高
+    -->
     <define name="HOVER_KI"    value="20"/>
+    <!-- 预计悬停油门
+
+        这里：
+        0.5 = 50%
+
+        意味着：
+        油门50%
+        ≈ 悬停
+
+        例如：
+        轻载四轴
+        35%
+
+        可以悬停
+
+        则：
+        0.35
+        更合适。
+
+        重载四轴
+        65%
+
+        悬停
+
+        则：
+        0.65
+        更合理。
+
+        如果设置不准：
+        可能出现：
+        自动起飞很猛
+        自动降落很慢
+        高度控制不稳
+    -->
     <define name="NOMINAL_HOVER_THROTTLE" value="0.5"/>
+    <!-- 允许自动学习悬停油门
+        飞行过程中：
+        实际悬停需要52%
+
+        飞控会逐渐把：
+        NOMINAL_HOVER_THROTTLE
+        0.50
+        ↓
+        0.52
+        进行修正。
+
+        对于实验机：
+        TRUE
+        一般推荐保持开启。
+    -->
     <define name="ADAPT_THROTTLE_ENABLED" value="TRUE"/>
   </section>
 
+  <!-- GUIDANCE_H（水平导航）
+      负责：
+      GPS定位
+      自动悬停
+      自动返航
+      航点飞行
+  -->
   <section name="GUIDANCE_H" prefix="GUIDANCE_H_">
+    <!-- 自动导航允许的最大倾角
+        例如：
+        飞机要向前飞
+
+        飞控会让飞机俯仰：
+        5°
+        10°
+        15°
+        20°
+
+        但不会超过：
+        20°
+
+        影响：
+
+        小
+        10°
+
+        效果：
+        慢
+        稳
+
+        大
+        35°
+
+        效果：
+        快
+        激进
+    -->
     <define name="MAX_BANK" value="20" unit="deg"/>
+    <!--
+        表示：
+
+        位置控制
+        ↓
+        先生成速度目标
+        ↓
+        再生成姿态目标
+
+        属于：
+        位置环
+        →速度环
+        →姿态环
+
+        控制结构。
+
+        这是官方推荐方式。
+        一般不要改。
+    -->
     <define name="USE_SPEED_REF" value="TRUE"/>
+    <!-- 位置误差增益。
+        例如：
+        目标位置
+        距离当前位置
+        5m
+
+        则：
+        生成前进速度
+
+        PGAIN越大：
+        追目标更快
+
+        但容易：
+        来回摆动
+    -->
     <define name="PGAIN" value="50"/>
+    <!-- 速度阻尼 
+        作用：
+        减小冲过头
+    -->
     <define name="DGAIN" value="100"/>
+    <!-- 加速度反馈 
+        用于：
+        GPS
+        IMU
+        融合控制。
+
+        作用：
+        提高动态响应
+    -->
     <define name="AGAIN" value="70"/>
+    <!-- 积分项 
+        解决：
+        长期位置漂移
+
+        例如：
+        风一直吹
+        飞机始终偏东。
+        IGAIN会慢慢修正。
+    -->
     <define name="IGAIN" value="20"/>
   </section>
 
