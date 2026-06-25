@@ -512,7 +512,11 @@
   <section name="AUTOPILOT">
     <define name="MODE_MANUAL" value="AP_MODE_ATTITUDE_DIRECT"/>
     <define name="MODE_AUTO1"  value="AP_MODE_HOVER_Z_HOLD"/>
+    <!--
+    因为要启用光流定点模式，所以只能先把这个模式空出来
     <define name="MODE_AUTO2"  value="AP_MODE_NAV"/>
+    -->
+    <define name="MODE_AUTO2"  value="AP_MODE_MODULE"/>
   </section>
 
   <!-- 电池监测（Battery Monitoring）配置 
