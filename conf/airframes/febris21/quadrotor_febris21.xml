@@ -182,8 +182,8 @@
         遥控器抖动
         摇杆回中不准
     -->
-    <define name="DEADBAND_A"     value="0"/>
-    <define name="DEADBAND_E"     value="0"/>
+    <define name="DEADBAND_A"     value="150"/>
+    <define name="DEADBAND_E"     value="150"/>
     <define name="DEADBAND_R"     value="250"/>
 
     <!-- Reference（期望姿态响应）
@@ -529,6 +529,16 @@
     <define name="MAX_BAT_LEVEL" value="12.4" unit="V"/>
     <!-- 满油门电流 -->
     <define name="MILLIAMP_AT_FULL_THROTTLE" value="30000"/>
+  </section>
+
+  <!-- 光流参数 -->
+  <section name="VISION" prefix="VISION_">
+    <define name="PHI_PGAIN" value="400"/>
+    <define name="PHI_IGAIN" value="20"/>
+    <define name="THETA_PGAIN" value="400"/>
+    <define name="THETA_IGAIN" value="20"/>
+    <define name="DESIRED_VX" value="0"/>
+    <define name="DESIRED_VY" value="0"/>
   </section>
 
 </airframe>
