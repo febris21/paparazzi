@@ -54,6 +54,7 @@
     <!--define name="KILL_ON_GROUND_DETECT" value="TRUE"/-->
   </firmware>
 
+  <!-- 飞控输出端（Servo Outputs）-->
   <servos driver="Pwm">
     <servo name="FRONT"   no="0" min="1000" neutral="1100" max="1900"/>
     <servo name="BACK"    no="1" min="1000" neutral="1100" max="1900"/>
@@ -61,6 +62,13 @@
     <servo name="LEFT"    no="3" min="1000" neutral="1100" max="1900"/>
   </servos>
 
+  <!-- 飞控内部的控制轴（commands）
+      失控时：
+        横滚 = 0
+        俯仰 = 0
+        偏航 = 0
+        推力 = 0
+  -->
   <commands>
     <axis name="ROLL"   failsafe_value="0"/>
     <axis name="PITCH"  failsafe_value="0"/>
