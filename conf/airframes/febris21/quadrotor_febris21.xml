@@ -56,10 +56,10 @@
 
   <!-- 飞控输出端（Servo Outputs）-->
   <servos driver="Pwm">
-    <servo name="FRONT"   no="0" min="1000" neutral="1100" max="1900"/>
-    <servo name="BACK"    no="1" min="1000" neutral="1100" max="1900"/>
-    <servo name="RIGHT"   no="2" min="1000" neutral="1100" max="1900"/>
-    <servo name="LEFT"    no="3" min="1000" neutral="1100" max="1900"/>
+    <servo name="FL" no="0" min="1000" neutral="1100" max="1900"/>
+    <servo name="FR" no="1" min="1000" neutral="1100" max="1900"/>
+    <servo name="BR" no="2" min="1000" neutral="1100" max="1900"/>
+    <servo name="BL" no="3" min="1000" neutral="1100" max="1900"/>
   </servos>
 
   <!-- 飞控内部的控制轴（commands）
@@ -77,16 +77,16 @@
   </commands>
 
   <section name="MIXING" prefix="MOTOR_MIXING_">
-    <!-- front (CW), right (CCW), back (CW), left (CCW) -->
-    <define name="TYPE" value="QUAD_PLUS"/>
+    <!-- front left (CW), front right (CCW), back right (CW), back left (CCW) -->
+    <define name="TYPE" value="QUAD_X"/>
   </section>
 
   <command_laws>
     <call fun="motor_mixing_run(autopilot_get_motors_on(),FALSE,values)"/>
-    <set servo="FRONT" value="motor_mixing.commands[MOTOR_FRONT]"/>
-    <set servo="RIGHT" value="motor_mixing.commands[MOTOR_RIGHT]"/>
-    <set servo="BACK"  value="motor_mixing.commands[MOTOR_BACK]"/>
-    <set servo="LEFT"  value="motor_mixing.commands[MOTOR_LEFT]"/>
+    <set servo="FL" value="motor_mixing.commands[MOTOR_FRONT_LEFT]"/>
+    <set servo="FR" value="motor_mixing.commands[MOTOR_FRONT_RIGHT]"/>
+    <set servo="BR" value="motor_mixing.commands[MOTOR_BACK_RIGHT]"/>
+    <set servo="BL" value="motor_mixing.commands[MOTOR_BACK_LEFT]"/>
   </command_laws>
 
   <section name="IMU" prefix="IMU_">
